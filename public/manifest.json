@@ -1,0 +1,16 @@
+{
+    "manifest_version": 3,
+    "name": "EmojiText",
+    "version": "1.0.0",
+    "description": "텍스트에 감정을 더하세요! EmojiText는 AI를 활용해 당신의 메시지에 딱 맞는 이모지를 추천합니다. 한 번의 클릭으로 글에 활력을 불어넣어 보세요. 소통의 재미를 높이고 감정을 생생하게 전달하세요.",
+    "action": {
+        "default_popup": "index.html"
+    },
+    "permissions": [
+        "scripting"
+    ],
+    "host_permissions": [
+        "https://*/*",
+        "http://*/*"
+    ]
+}
