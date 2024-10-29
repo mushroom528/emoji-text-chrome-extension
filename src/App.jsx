@@ -13,10 +13,11 @@ function App() {
   const handleSubmit = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch('http://localhost:8080/api/chat', {
+      const response = await fetch(import.meta.env.VITE_EMOJI_API_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          [import.meta.env.VITE_EMOJI_API_HEADER]: import.meta.env.VITE_EMOJI_API_KEY
         },
         body: JSON.stringify({ text, level }),
       });
@@ -46,6 +47,21 @@ function App() {
     }
   };
 
+  const emojiLevels = [
+    {
+      text: "Small",
+      value: "small"
+    },
+    {
+      text: "Medium😙",
+      value: "medium"
+    },
+    {
+      text: "😎Large😎",
+      value: "large"
+    },
+  ]
+
   return (
     <div className="w-[400px] min-h-[450px] bg-white">
       <header className="bg-purple-700 text-white p-4 flex justify-between items-center">
@@ -62,7 +78,7 @@ function App() {
             onChange={handleTextChange}
             placeholder="Enter your text..."
             maxLength={maxLength}
-          />@ㄷㅈ
+          />
           <div className="text-right text-sm text-gray-500 mt-1">
             {text.length}/{maxLength}
           </div>
@@ -70,17 +86,17 @@ function App() {
         <div className="mb-6">
           <label className="block text-sm font-medium text-gray-700 mb-2">Emoji Level</label>
           <div className="flex justify-between space-x-2">
-            {['small', 'medium', 'large'].map((option) => (
+            {emojiLevels.map((option) => (
               <button
-                key={option}
-                onClick={() => setLevel(option)}
+                key={option.value}
+                onClick={() => setLevel(option.value)}
                 className={`flex-1 py-2 px-4 text-sm font-medium rounded ${
-                  level === option
+                  level === option.value
                     ? 'bg-purple-600 text-white'
                     : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                 }`}
               >
-                {option.charAt(0).toUpperCase() + option.slice(1)}
+                {option.text}
               </button>
             ))}
           </div>
